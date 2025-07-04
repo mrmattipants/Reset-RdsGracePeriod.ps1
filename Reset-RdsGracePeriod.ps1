@@ -6,10 +6,10 @@ If (-NOT(Get-Module -Name Invoke-CommandAs -ListAvailable) {
    Install-Module -Name Invoke-CommandAs -Scope AllUsers -Force
 }
 # Check Number of Days Left in Grace Period
-$DaysLeft = (invoke-cimmethod -inputobject (get-ciminstance -namespace root/CIMV2/TerminalServices -classname Win32_TerminalServiceSetting) -methodname GetGracePeriodDays).DaysLeft
+$DaysLeft = (invoke-cimmethod -inputobject (get-ciminstance -namespace root/CIMV2/TerminalServices -classname Win32_TerminalServiceSetting) -methodname GetGracePeriodDays -ErrorAction SilentlyContinue).DaysLeft
 
 # If Grace Period has Less Than 10 Days Remaining, Reset Grace Period
-If ($DaysLeft -lt 10) {
+If ($DaysLeft -lt 10 -or $DaysLeft -eq $Null) {
 
     # Reset Grace Period Registry Key
     Invoke-CommandAs -ScriptBlock { `
