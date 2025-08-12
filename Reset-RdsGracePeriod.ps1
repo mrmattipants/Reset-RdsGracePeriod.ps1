@@ -2,7 +2,7 @@
 # https://github.com/mkellerman/Invoke-CommandAs
 
 # Intall Invoke-CommandAs Module if Not Installed
-If (-NOT(Get-Module -Name Invoke-CommandAs -ListAvailable) {
+If (-NOT(Get-Module -Name Invoke-CommandAs -ListAvailable)) {
    Install-Module -Name Invoke-CommandAs -Scope AllUsers -Force
 }
 # Check Number of Days Left in Grace Period
